@@ -212,6 +212,9 @@ int main(void)
 }
 void key()
 {
+    Lcd_HandleTypeDef lcd;
+    lcd = Lcd_create(ports, pins, GPIOB, GPIO_PIN_0, GPIOB, GPIO_PIN_1, LCD_4_BIT_MODE);
+
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
@@ -244,7 +247,72 @@ void key()
         Lcd_string(&lcd, "key %\n");
         HAL_Delay(1000);
     }
-}
+
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
+
+    col1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_4);
+    col2 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5);
+    col3 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
+    col4 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
+
+    Lcd_cursor(&lcd, 0, 1);
+
+    if(!col1)
+    {
+        Lcd_string(&lcd, "key 4\n");
+        HAL_Delay(1000);
+    }
+    else if(!col2)
+    {
+        Lcd_string(&lcd, "key 5\n");
+        HAL_Delay(1000);
+    }
+    else if(!col3)
+    {
+        Lcd_string(&lcd, "key 6\n");
+        HAL_Delay(1000);
+    }
+    else if(!col4)
+    {
+        Lcd_string(&lcd, "key *\n");
+        HAL_Delay(1000);
+    }
+
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, GPIO_PIN_SET);
+
+    col1 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_4);
+    col2 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5);
+    col3 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
+    col4 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
+
+    Lcd_cursor(&lcd, 0, 1);
+
+    if(!col1)
+    {
+        Lcd_string(&lcd, "key 1\n");
+        HAL_Delay(1000);
+    }
+    else if(!col2)
+    {
+        Lcd_string(&lcd, "key 2\n");
+        HAL_Delay(1000);
+    }
+    else if(!col3)
+    {
+        Lcd_string(&lcd, "key 3\n");
+        HAL_Delay(1000);
+    }
+    else if(!col4)
+    {
+        Lcd_string(&lcd, "key -\n");
+        HAL_Delay(1000);
+    }
 
 
 
